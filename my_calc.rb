@@ -9,6 +9,7 @@ class Mycalc
   @user_input = nil
   @operator = nil
   @values = nil
+  @saved = nil
 
   def self.get_op(input)
     op = []
@@ -59,9 +60,12 @@ class Mycalc
   end
 
   def self.calculator
-    puts "Enter a single operator statement using (+,-,/,*,^,sqrt,ln,log)"
-    print "Enter your equation: "
+    print "Enter a single operator statement using (+,-,/,*,^,sqrt,ln,log) or
+type quit.\n\n"
     @user_input = gets.chomp.gsub(%r{\s+},"")
+    if @user_input.downcase == "quit"
+      return
+    end
 
     @operator = self.get_op(@user_input)
 
@@ -82,23 +86,9 @@ class Mycalc
     end
     
     @result = self.calc
-    puts "The answer is #{@result}"
+    puts @result
     puts
 
-    while true
-      print "Perform another calculation (y/n) ? "
-      @user_input = gets.chomp.strip.downcase
-      
-      if @user_input == "n"
-        return
-      elsif @user_input == "y"
-        self.calculator
-      else
-        puts "Invalid answer. Please type 'y' or 'n'."
-        next
-      end
-
-      return
-    end
+    self.calculator
   end
 end
