@@ -14,6 +14,14 @@ class Mycalc
     op = []
 
     op = input.scan(%r{[-\+\/*^]})
+    
+    if input.include?"sqrt"
+      return ["sqrt"]
+    elsif input.include?"ln"
+      return ["ln"]
+    elsif input.include?"log"
+      return ["log"]
+    end
 
     return op
   end
@@ -40,16 +48,23 @@ class Mycalc
       end
     when "^"
       return @values[0] ** @values[1]
+    when "sqrt"
+      return Math.sqrt @values[1]
+    when "ln"
+      return Math.log @values[1]
+    when "log"
+      return Math.log10 @values[1]
     end
     return nil
   end
 
   def self.calculator
-    puts "Enter a single operator statement using (+,-,/,*,^)"#,sqrt,ln,log)"
+    puts "Enter a single operator statement using (+,-,/,*,^,sqrt,ln,log)"
     print "Enter your equation: "
     @user_input = gets.chomp.gsub(%r{\s+},"")
 
     @operator = self.get_op(@user_input)
+
     if not @operator.length == 1
       puts "Error: input must contain 1 and only 1 operator"
       return
@@ -57,8 +72,13 @@ class Mycalc
     @operator = @operator[0]
 
     @values = @user_input.split(@operator)
-    (0..@values.length).each do |x|
-      @values[x] = @values[x].to_f
+    if @values.length > 0
+      (0..@values.length).each do |x|
+        @values[x] = @values[x].to_f
+      end
+    else
+      puts "Error: no operands"
+      return
     end
     
     @result = self.calc
