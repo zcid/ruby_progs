@@ -14,7 +14,10 @@ class Mycalc
   def self.get_op(input)
     op = []
 
-    op = input.scan(%r{[-\+\/*^]})
+    op = input.scan(%r{[\+\/*^]})
+    if op.length < 1
+      op = input.scan(%r{[-]})
+    end
     
     if input.include?"sqrt"
       return ["sqrt"]
