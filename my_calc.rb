@@ -1,6 +1,7 @@
 =begin
 
-The mycalc class is called with mycalc.calculator and provides the user with a prompt to perform basic arithmetic functions with a single operator.
+The mycalc class is called with mycalc.calculator and provides the user with a
+prompt to perform basic arithmetic functions with a single operator.
 
 =end
 
