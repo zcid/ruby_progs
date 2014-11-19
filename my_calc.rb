@@ -60,8 +60,12 @@ class Mycalc
   end
 
   def self.calculator
+    system("clear")
     print "Enter a single operator statement using (+,-,/,*,^,sqrt,ln,log) or
 type quit.\n\n"
+    puts "Last result: #{@result}"
+    puts
+
     @user_input = gets.chomp.gsub(%r{\s+},"")
     if @user_input.downcase == "quit"
       return
