@@ -10,6 +10,7 @@ class Mycalc
   @operator = nil
   @values = nil
   @saved = nil
+  @f_negative = false # tracks negative inputs with subtraction
 
   def self.get_op(input)
     op = []
@@ -17,6 +18,10 @@ class Mycalc
     op = input.scan(%r{[\+\/*^]})
     if op.length < 1
       op = input.scan(%r{[-]})
+      if op.length == 2
+        @f_negative = true
+        op.pop
+      end
     end
     
     if input.include?"sqrt"
@@ -93,6 +98,9 @@ type quit.\n\n"
     end
     
     @result = self.calc
+    if @f_negative == true
+      @result *= -1
+    end
     puts @result
     puts
 
